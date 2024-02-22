@@ -1,0 +1,138 @@
+#include <iostream>
+#include <vector>
+#include <chrono>
+using namespace std;
+void print(int n,vector<int> arr){
+    for(int i=0;i<n;i++){
+        std::cout<<arr[i]<<" ";
+    }
+    std::cout<<"\n";
+}
+vector<vector<int>> makeRandomArrays(int start_size,int end_size,int step, int value_limit){
+    vector<vector<int>> arrays;
+    vector<int> sample;
+    for(int i=start_size;i<end_size+1;i=i+step){
+        sample.clear();
+        for(int j=0;j<i;j++){
+            sample.push_back(rand()%(value_limit+1));
+        }
+        arrays.push_back(sample);
+    }
+    return arrays;
+}
+void swap(int &a,int &b){
+    int temp=a;
+    a=b;
+    b=temp;
+}
+
+
+void runtheProgramInsertion(int n,vector<int> inputs){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            if(inputs[j]>inputs[j+1]){
+                swap(inputs[j],inputs[j+1]);
+            }
+        }
+    }
+}
+void runtheProgramBubble(int n,vector<int> arr){
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            if(arr[j]>arr[j+1]){
+                swap(arr[j],arr[j+1]);
+            }
+        }
+    }
+}
+void runtheProgramOptimizedBubble(int n,vector<int> arr){
+    bool swaped=false;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n-i-1;j++){
+            if(arr[j]>arr[j+1]){
+                swap(arr[j],arr[j+1]);
+                swaped=true;
+            }
+        }
+        if(!swaped){
+            break;
+        }
+
+    }
+}
+void runtheProgramSelection(int n,vector<int> inputs){
+    for(int i=0;i<n;i++){
+        int index_small=i;
+        for(int j=i+1;j<n;j++){
+            if(inputs[j]<inputs[index_small]){
+                index_small=j;
+            }
+        }
+        swap(inputs[i],inputs[index_small]);
+        
+    }
+    
+    
+}
+
+int main() {
+    //Get the values
+    vector<vector<int>> arrays=makeRandomArrays(3,50,2,100);
+
+    double sum_duration;
+    vector<double> avg_duration;
+    string topic;
+    for(int sorting=0;sorting<4;sorting++){
+        avg_duration.clear();
+        for(int t=0;t<arrays.size();t++){
+            sum_duration=0.0f;
+    
+            for(int i=0;i<5;i++){//5 times
+    
+                auto start = chrono::high_resolution_clock::now();
+    
+    
+                switch(sorting){
+                    case 0:
+                    runtheProgramInsertion(arrays[t].size(),arrays[t]);
+                    topic="\n\n\nInsertion\n#########\n";
+                    break;
+                    case 1:
+                    runtheProgramBubble(arrays[t].size(),arrays[t]);
+                    topic="\n\n\nBubble\n#########\n";
+                    break;
+                    case 2:
+                    runtheProgramOptimizedBubble(arrays[t].size(),arrays[t]);
+                    topic="\n\n\nOptimized Bubble\n#########\n";
+                    break;
+                    case 3:
+                    runtheProgramSelection(arrays[t].size(),arrays[t]);
+                    topic="\n\n\nSelection\n#########\n";
+                    break;
+                    default:
+                    break;
+                }
+                auto end = chrono::high_resolution_clock::now();
+    
+                // Calculating total time taken by the program.
+                double time_taken =
+                chrono::duration_cast<chrono::nanoseconds>(end - start).count();
+    
+    
+    
+                sum_duration=sum_duration+time_taken;
+    
+    
+    
+            }
+            avg_duration.push_back(sum_duration/5.0f);
+        }
+        cout<<topic;
+        for(int i=0;i<avg_duration.size();i++){
+            printf("%.20f\n",avg_duration[i]);
+        }
+    }
+    
+
+    return 0;
+}
