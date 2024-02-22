@@ -1,3 +1,4 @@
+```cpp
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -20,59 +21,21 @@ vector<vector<int>> makeRandomArrays(int start_size,int end_size,int step, int v
     }
     return arrays;
 }
-void swap(int &a,int &b){
-    int temp=a;
-    a=b;
-    b=temp;
-}
+
+//Add your programs and other functions here.
 
 
-void runtheProgramInsertion(int n,vector<int> inputs){
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            if(inputs[j]>inputs[j+1]){
-                swap(inputs[j],inputs[j+1]);
-            }
-        }
-    }
+void runtheProgram1(int n,vector<int> inputs){
+       
 }
-void runtheProgramBubble(int n,vector<int> arr){
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            if(arr[j]>arr[j+1]){
-                swap(arr[j],arr[j+1]);
-            }
-        }
-    }
+void runtheProgram2(int n,vector<int> inputs){
+       
 }
-void runtheProgramOptimizedBubble(int n,vector<int> arr){
-    bool swaped=false;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n-i-1;j++){
-            if(arr[j]>arr[j+1]){
-                swap(arr[j],arr[j+1]);
-                swaped=true;
-            }
-        }
-        if(!swaped){
-            break;
-        }
-
-    }
+void runtheProgram3(int n,vector<int> inputs){
+       
 }
-void runtheProgramSelection(int n,vector<int> inputs){
-    for(int i=0;i<n;i++){
-        int index_small=i;
-        for(int j=i+1;j<n;j++){
-            if(inputs[j]<inputs[index_small]){
-                index_small=j;
-            }
-        }
-        swap(inputs[i],inputs[index_small]);
-        
-    }
-    
-    
+void runtheProgram4(int n,vector<int> inputs){
+       
 }
 
 int main() {
@@ -82,7 +45,7 @@ int main() {
     double sum_duration;
     vector<double> avg_duration;
     string topic;
-    for(int sorting=0;sorting<4;sorting++){
+    for(int sorting=0;sorting<4;sorting++){  // change the number of sorting algorithms (sorting < (number of algorithms))
         avg_duration.clear();
         for(int t=0;t<arrays.size();t++){
             sum_duration=0.0f;
@@ -94,20 +57,20 @@ int main() {
     
                 switch(sorting){
                     case 0:
-                    runtheProgramInsertion(arrays[t].size(),arrays[t]);
-                    topic="\n\n\nInsertion\n#########\n";
+                    runtheProgram1(arrays[t].size(),arrays[t]);
+                    topic="\n\n\nTopic 1\n#########\n";
                     break;
                     case 1:
-                    runtheProgramBubble(arrays[t].size(),arrays[t]);
-                    topic="\n\n\nBubble\n#########\n";
+                    runtheProgram2(arrays[t].size(),arrays[t]);
+                    topic="\n\n\nTopic 2\n#########\n";
                     break;
                     case 2:
-                    runtheProgramOptimizedBubble(arrays[t].size(),arrays[t]);
-                    topic="\n\n\nOptimized Bubble\n#########\n";
+                    runtheProgram3(arrays[t].size(),arrays[t]);
+                    topic="\n\n\nTopic 3\n#########\n";
                     break;
                     case 3:
-                    runtheProgramSelection(arrays[t].size(),arrays[t]);
-                    topic="\n\n\nSelection\n#########\n";
+                    runtheProgram4(arrays[t].size(),arrays[t]);
+                    topic="\n\n\Topic 4\n#########\n";
                     break;
                     default:
                     break;
@@ -117,12 +80,10 @@ int main() {
                 // Calculating total time taken by the program.
                 double time_taken =
                 chrono::duration_cast<chrono::nanoseconds>(end - start).count();
-    
-    
+      
     
                 sum_duration=sum_duration+time_taken;
-    
-    
+     
     
             }
             avg_duration.push_back(sum_duration/5.0f);
@@ -136,3 +97,4 @@ int main() {
 
     return 0;
 }
+```
