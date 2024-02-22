@@ -1,3 +1,9 @@
+> # Info
+> - Before run this code,
+>  1. Add your pragrams to proper places (read comments and follow them)
+>  2. Change the number of algorithms in the main method
+>  3. According to your programs count, change the switch case (I have created it for 4 algorithms)
+>
 ```cpp
 #include <iostream>
 #include <vector>
