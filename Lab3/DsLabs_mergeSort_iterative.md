@@ -1,3 +1,4 @@
+```cpp
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -67,3 +68,4 @@ int main(){
     vector<int> Res=mergeSort(A,0,(int)A.size()-1);
     print(Res);
 }
+```
