@@ -1,5 +1,5 @@
-# Lab 5 (Stacks)
-***
+> # Algorithms
+> In C++
 > * Stack implementation with an array
 > * Stack implementation with a linked list
 ***
